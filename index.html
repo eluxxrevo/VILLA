@@ -1,1 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa - Trade ELTCOIN & Footballer Shares</title>
+    <style>
+        :root {
+            --primary-color: #ffffff; /* White */
+            --accent-color: #1b5e20; /* Royal Green */
+            --text-color: #333;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        /* Splash Screen with Lion Animation */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        /* Trading Section */
+        .trading-section {
+            display: flex;
+            gap: 20px;
+        }
+
+        .chart-container {
+            flex: 2;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .trade-controls {
+            flex: 1;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .trade-controls input,
+        .trade-controls select,
+        .trade-controls button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .trade-controls button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+        }
+
+        .trade-controls button:hover {
+            background-color: #2e7d32;
+        }
+
+        /* Players Market */
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .player-card {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .player-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .player-card h3 {
+            margin: 10px 0;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .profile-section input,
+        .profile-section button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .profile-section button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Settings Section */
+        .settings-section {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .trading-section {
+                flex-direction: column;
+            }
+
+            .nav-links a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen with Lion Animation -->
+    <div id="splash-screen">
+        <!-- Placeholder for Lottie Animation -->
+        <div id="lion-animation"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>Villa</h1>
+        <div class="nav-links">
+            <a href="#trade">Trade</a>
+            <a href="#players">Players Market</a>
+            <a href="#profile">Profile</a>
+            <a href="#settings">Settings</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Trading Section -->
+        <div id="trade" class="section">
+            <h2>Trade ELTCOIN (ETC)</h2>
+            <div class="trading-section">
+                <div class="chart-container">
+                    <!-- TradingView Widget Placeholder -->
+                    <div id="tradingview-chart"></div>
+                </div>
+                <div class="trade-controls">
+                    <h3>Place Trade</h3>
+                    <select id="lot-size">
+                        <option value="0.00020">0.00020 ETC</option>
+                        <option value="0.001">0.001 ETC</option>
+                        <option value="0.01">0.01 ETC</option>
+                    </select>
+                    <select id="time-frame">
+                        <option value="1m">1 Minute</option>
+                        <option value="5m">5 Minutes</option>
+                        <option value="1h">1 Hour</option>
+                        <option value="1d">1 Day</option>
+                    </select>
+                    <input type="number" id="amount" placeholder="Amount (ETC)" min="0.00020">
+                    <button onclick="placeTrade('buy')">Buy</button>
+                    <button onclick="placeTrade('sell')">Sell</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Players Market -->
+        <div id="players" class="section">
+            <h2>Players Market</h2>
+            <div class="players-grid">
+                <!-- Placeholder for 10 Footballers -->
+                <div class="player-card">
+                    <img src="https://via.placeholder.com/200x150" alt="Player 1">
+                    <h3>Player 1</h3>
+                    <p>Price: 0.001 ETC</p>
+                    <button onclick="tradePlayer('Player 1', 'buy')">Buy</button>
+                    <button onclick="tradePlayer('Player 1', 'sell')">Sell</button>
+                </div>
+                <!-- Repeat for other players -->
+                <div class="player-card">
+                    <img src="https://via.placeholder.com/200x150" alt="Player 2">
+                    <h3>Player 2</h3>
+                    <p>Price: 0.002 ETC</p>
+                    <button onclick="tradePlayer('Player 2', 'buy')">Buy</button>
+                    <button onclick="tradePlayer('Player 2', 'sell')">Sell</button>
+                </div>
+                <!-- Add 8 more players as needed -->
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="section">
+            <h2>Profile</h2>
+            <div class="profile-section">
+                <p><strong>Balance:</strong> <span id="etc-balance">0 ETC</span> | <span id="usd-balance">$0</span></p>
+                <p><strong>Daily P&L:</strong> <span id="pnl">0%</span></p>
+                <h3>Deposit</h3>
+                <a href="https://paystack.com/buy/brooker-cxubjs" target="_blank">
+                    <button>Deposit (Min $5)</button>
+                </a>
+                <h3>Withdraw</h3>
+                <input type="number" id="withdraw-amount" placeholder="Amount (Min $10)" min="10">
+                <input type="file" id="kyc-id" accept="image/*" placeholder="Upload ID">
+                <button onclick="requestWithdrawal()">Withdraw</button>
+                <h3>Transaction History</h3>
+                <ul id="transaction-history"></ul>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="section">
+            <h2>Settings</h2>
+            <div class="settings-section">
+                <input type="text" id="username" placeholder="Username">
+                <input type="file" id="profile-photo" accept="image/*">
+                <select id="theme-color">
+                    <option value="default">Default (White & Green)</option>
+                    <option value="dark">Dark Mode</option>
+                </select>
+                <button onclick="saveSettings()">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js"></script>
+    <!-- Lottie for Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <!-- TradingView Widget (Placeholder) -->
+    <script src="https://s3.tradingview.com/tv.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBoQrBXczQwIxEY2951YLjhnAQro355c9c",
+            authDomain: "villa-32fad.firebaseapp.com",
+            projectId: "villa-32fad",
+            storageBucket: "villa-32fad.firebasestorage.app",
+            messagingSenderId: "624081701593",
+            appId: "1:624081701593:web:33afc121c7823ae23d0cc8",
+            measurementId: "G-PBR92W37Z4"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const analytics = firebase.analytics();
+
+        // Splash Screen Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load Lottie Animation (Replace with your lion animation JSON)
+            lottie.loadAnimation({
+                container: document.getElementById('lion-animation'),
+                renderer: 'svg',
+                loop: false,
+                autoplay: true,
+                path: 'https://assets.lottiefiles.com/packages/lf20_kkflmtur.json' // Placeholder
+            });
+
+            // Hide splash screen after 3 seconds
+            setTimeout(() => {
+                document.getElementById('splash-screen').classList.add('hidden');
+            }, 3000);
+
+            // Initialize TradingView Chart
+            new TradingView.widget({
+                container_id: "tradingview-chart",
+                symbol: "ELTCOIN/USD",
+                interval: "D",
+                timezone: "Etc/UTC",
+                theme: "light",
+                style: "1",
+                locale: "en",
+                toolbar_bg: "#f1f3f6",
+                enable_publishing: false,
+                allow_symbol_change: false,
+                details: true,
+                studies: ["RSI@tv-basicstudies", "MACD@tv-basicstudies"]
+            });
+        });
+
+        // User Authentication
+        function loginUser(email, password) {
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    console.log("Logged in:", userCredential.user);
+                    loadUserProfile();
+                })
+                .catch(error => alert("Login failed: " + error.message));
+        }
+
+        function registerUser(email, password, fullName) {
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    db.collection("users").doc(userCredential.user.uid).set({
+                        fullName,
+                        etcBalance: 0,
+                        usdBalance: 0,
+                        transactions: []
+                    });
+                    console.log("Registered:", userCredential.user);
+                })
+                .catch(error => alert("Registration failed: " + error.message));
+        }
+
+        // Load User Profile
+        function loadUserProfile() {
+            const user = auth.currentUser;
+            if (user) {
+                db.collection("users").doc(user.uid).get().then(doc => {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById('etc-balance').textContent = `${data.etcBalance} ETC`;
+                        document.getElementById('usd-balance').textContent = `$${data.usdBalance}`;
+                        // Load transaction history
+                        const history = document.getElementById('transaction-history');
+                        history.innerHTML = '';
+                        data.transactions.forEach(tx => {
+                            const li = document.createElement('li');
+                            li.textContent = `${tx.type}: ${tx.amount} ETC on ${tx.date}`;
+                            history.appendChild(li);
+                        });
+                    }
+                });
+            }
+        }
+
+        // Place Trade
+        function placeTrade(type) {
+            const lotSize = document.getElementById('lot-size').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (amount < 0.00020) {
+                alert("Minimum trade amount is 0.00020 ETC");
+                return;
+            }
+            // Backend logic to process trade (Placeholder)
+            console.log(`Placing ${type} trade for ${amount} ETC`);
+            // Update Firestore with transaction
+        }
+
+        // Trade Player Shares
+        function tradePlayer(playerName, type) {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (amount < 0.00020) {
+                alert("Minimum trade amount is 0.00020 ETC");
+                return;
+            }
+            // Backend logic to process player trade (Placeholder)
+            console.log(`Trading ${playerName} - ${type} for ${amount} ETC`);
+        }
+
+        // Request Withdrawal
+        function requestWithdrawal() {
+            const amount = parseFloat(document.getElementById('withdraw-amount').value);
+            const kycId = document.getElementById('kyc-id').files[0];
+            if (amount < 10) {
+                alert("Minimum withdrawal is $10");
+                return;
+            }
+            if (!kycId) {
+                alert("Please upload ID for verification");
+                return;
+            }
+            // Backend logic to process withdrawal (Placeholder)
+            console.log(`Withdrawal request: $${amount}`);
+            alert("Withdrawal requested. Processing in 2 working days.");
+        }
+
+        // Save Settings
+        function saveSettings() {
+            const username = document.getElementById('username').value;
+            const theme = document.getElementById('theme-color').value;
+            // Save to Firestore
+            const user = auth.currentUser;
+            if (user) {
+                db.collection("users").doc(user.uid).update({
+                    username,
+                    theme
+                });
+                alert("Settings saved!");
+            }
+        }
+
+        // Mock Login (Replace with actual form)
+        loginUser("test@example.com", "password123"); // For testing
+    </script>
+</body>
+</html>
